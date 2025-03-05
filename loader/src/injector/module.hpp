@@ -247,8 +247,6 @@ enum : uint32_t {
     SKIP_CLOSE_LOG_PIPE = (1u << 5),
 };
 
-#define MAX_FD_SIZE 1024
-
 #define DCL_PRE_POST(name)                                                                         \
     void name##_pre();                                                                             \
     void name##_post();
@@ -267,7 +265,7 @@ struct ZygiskContext {
     pid_t pid;
     uint32_t flags;
     uint32_t info_flags;
-    std::bitset<MAX_FD_SIZE> allowed_fds;
+    std::vector<bool> allowed_fds;
     std::vector<int> exempted_fds;
 
     struct RegisterInfo {
